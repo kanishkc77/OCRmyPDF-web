@@ -1,17 +1,10 @@
 FROM jbarlow83/ocrmypdf
 
-USER root
-
-RUN mkdir -p /app
 WORKDIR /app
 
-ADD requirements.txt /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
-RUN pip install -r requirements.txt
+COPY . .
 
-ADD server.py index.htm entrypoint.sh /app/
-ADD static /app/static/
-
-USER docker
-
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["gunicorn", "app:app"]
