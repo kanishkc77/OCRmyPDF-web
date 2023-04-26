@@ -2,8 +2,7 @@ FROM jbarlow83/ocrmypdf
 
 USER root
 
-RUN rm /app
-RUN mkdir /app
+RUN mkdir -p /app
 WORKDIR /app
 
 ADD requirements.txt /app
